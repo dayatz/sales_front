@@ -75,6 +75,18 @@
                                 <input id="icon_prefix" type="password" class="validate" v-model="row.password">
                                 <label for="icon_prefix">Password</label>
                             </div>
+                            <div class="input-field col s12">
+                                <input id="icon_prefix" type="text" class="validate" v-model="row.app_id">
+                                <label for="icon_prefix">APP ID</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="icon_prefix" type="text" class="validate" v-model="row.cert_id">
+                                <label for="icon_prefix">CERT ID</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="icon_prefix" type="text" class="validate" v-model="row.dev_id">
+                                <label for="icon_prefix">DEV ID</label>
+                            </div>
                             
                             <p>
                                 <input type="checkbox" :id="index" v-model="row.proxy_use" />

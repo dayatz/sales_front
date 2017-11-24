@@ -2,7 +2,16 @@ var vm = new Vue({
     el: '#settings',
     data: {
         rows: [
-            {email: 'dayat.py@gmail.com', password: 'asdf', proxy_use: false, proxy_ip: '', proxy_port: ''}
+            {
+                email: 'john.doe@gmail.com',
+                password: 'asdf',
+                proxy_use: false,
+                proxy_ip: '',
+                proxy_port: '',
+                app_id: '',
+                cert_id:'',
+                dev_id: ''
+            }
         ]
     },
     methods: {
