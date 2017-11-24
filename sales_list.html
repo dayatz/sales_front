@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <style>
+        .search:focus {
+            /*border-bottom: 1px solid rgb(76, 164, 231) !important;*/
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+        .search {
+            border-bottom: none !important;
+            font-size: 20px !important;
+        }
+        body {
+            background-color: #F5F8FA;
+        }
+        table.bordered>thead>tr, table.bordered>tbody>tr {
+            border-bottom: 1px solid #F5F8FA;
+        }
+        .btn-more {
+            opacity: 0;
+            height: 24px;
+            line-height: 24px;
+            padding: 0 0.5rem;
+        }
+        tr:hover .btn-more {
+            opacity: 1;
+        }
+        label>select {
+            display: inherit;
+            width: auto;
+            height: auto;
+        }
+        .dataTables_filter, .dataTables_info { display: none; }
+    </style>
+    <title>Sales</title>
+</head>
+<body>
+    <!-- Top Nav -->
+    <nav class="blue nav-extended">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="javascript:;" class="brand-logo open-sidenav" data-activates="slide-out" style="font-size: 16px">
+                    <i class="material-icons">format_align_left</i><span>Selling History</span>
+                </a>
+            </div>
+            <div class="nav-content">
+                <ul class="tabs tabs-transparent">
+                    <li class="tab"><a class="active" href="#test1">Tab1</a></li>
+                    <li class="tab"><a href="#test2">Tab2</a></li>
+                    <li class="tab"><a href="#test4">Tab3</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="display:none">
+        <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons">menu</i></a>
+    </div>
+
+    <!-- FAB -->
+    <!--div class="fixed-action-btn">
+        <a class="btn-floating btn-large green darken-1">
+            <i class="material-icons">add</i>
+        </a>
+        <ul>
+            <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+            <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+            <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+            <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+        </ul>
+    </div-->
+
+    <!-- Content -->
+    <div id="app">
+    <div class="container">
+        <div class="row" style="padding: 30px 0 0; margin-bottom: 0">
+            <div class="col s6 m3 l3">
+                <h5 class="grey-text text-darken-5">128 Items</h5>
+            </div>
+            <div class="input-field col s6 m9 l9" style="margin-top:0">
+                <i class="material-icons prefix grey-text text-darken-5" style="margin-top: 10px">search</i>
+                <input @input="searchDataTable" placeholder="search" id="first_name" type="text" class="grey-text text-darken-5 validate search" autocomplete="off">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+                    <table class="bordered highlight responsive-table" style="font-size: 13px">
+                        <thead>
+                            <tr class="grey-text text-darken-5">
+                                <th>EbayAccountID</th>
+                                <th></th>
+                                <th>Item</th>
+                                <th>Source</th>
+                                <th>EbayListingID</th>
+                                <th>BuyerName</th>
+                                <th>ShippingAddress</th>
+                                <th>SoldPrice</th>
+                                <th>SoldCount</th>
+                                <th>SoldDate/Time</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                
+                        <tbody>
+                            <tr v-for="item in items" class="grey-text text-darken-2">
+                                <td>#{{ item.id }}</td>
+                                <td>
+                                    <a href="javascript:;" class="grey-text text-darken-2">
+                                        <img :src="item.img" width="32" height="32" alt="">
+                                    </a>
+                                </td>
+                                <td class="valign-wrapper">
+                                    <a href="javascript:;" class="grey-text text-darken-2">{{ item.name }}</a>
+                                </td>
+                                <td>{{ item.source }}</td>
+                                <td>#{{ item.id }}</td>
+                                <td>{{ item.buyer }}</td>
+                                <td>{{ item.address }}</td>
+                                <td>{{ item.price|currency }}</td>
+                                <td>{{ item.qty }}</td>
+                                <td>{{ item.sold_at }}</td>
+                                <td>
+                                    <a :data-activates='item.id' class="dropdown-button btn-flat waves-effect btn-more"><i class="material-icons">more_vert</i></a>
+                                    <ul :id='item.id' class='dropdown-content'>
+                                        <li title="Detail"><a href="#!">Ordered</a></li>
+                                        <li title="Edit"><a href="#!">Shipped</a></li>
+                                        <li title="Delete"><a href="#!">Note</a></li>
+                                        <li title="Delete"><a href="#!">Delete</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Content -->
+
+    <!-- Side Nav -->
+    <ul id="nav-mobile" class="side-nav">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="https://placeimg.com/640/640/arch/grayscale">
+                </div>
+                <a href="#!user"><img class="circle" src="https://placeimg.com/64/64/animals"></a>
+                <a href="#!name"><span class="white-text name">Dayat</span></a>
+                <a href="#!email"><span class="white-text email">dayat.py@gmail.com</span></a>
+            </div>
+        </li>
+        <li><a href="#!" class="waves-effect"><i class="material-icons">home</i>Home</a></li>
+        <li><a href="#!" class="waves-effect"><i class="material-icons">assessment</i>Sales</a></li>
+        <li><a href="#!" class="waves-effect"><i class="material-icons">shopping_cart</i>Items</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="subheader">Subheader</a></li>
+        <li><a class="waves-effect" href="settings.html"><i class="material-icons">linear_scale</i>Settings</a></li>
+        <li><a class="waves-effect" href="login.html"><i class="material-icons">account_circle</i>Logout</a></li>
+    </ul>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue2-filters/dist/vue2-filters.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".button-collapse").sideNav();
+
+            $('.open-sidenav').click(function() {
+                $('.button-collapse').sideNav('show');
+            });
+        })
+    </script>
+
+    <script src="assets/js/sales_list.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Settings</title>
+    <style>
+        body {
+            background-color: #F5F8FA;
+        }
+        .subtitle {
+            font-size: 12px;
+        }
+        .setting-item:not(:last-child) {
+            margin-bottom: 50px
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Nav -->
+    <nav class="blue nav-extended">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="javascript:;" class="brand-logo open-sidenav" data-activates="slide-out" style="font-size: 16px">
+                    <i class="material-icons">format_align_left</i><span>Settings</span>
+                </a>
+            </div>
+            <div class="nav-content">
+                <ul class="tabs tabs-transparent">
+                    <li class="tab"><a target="_self" href="settings.html">Account settings</a></li>
+                    <li class="tab"><a class="active" href="#test2">System settings</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="display:none">
+        <a href="#" data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons">menu</i></a>
+    </div>
+
+    <!-- Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col s12 l8 offset-l2 m8 offset-m2">
+                <form action="">
+                    <div class="card">
+                        <div class="card-content grey-text row">
+                            <div class="setting-item col s12">
+                                <div class="col s8">
+                                    <p class="title">Email Notifications</p>
+                                    <p class="subtitle">Receive weekly email notifications</p>
+                                </div>
+                                <div class="switch col s4">
+                                    <label style="float: right">
+                                        <input type="checkbox">
+                                        <span class="lever"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="setting-item col s12">
+                                <div class="col s8">
+                                    <p class="title">Email Notifications</p>
+                                    <p class="subtitle">Receive weekly email notifications</p>
+                                </div>
+                                <div class="switch col s4">
+                                    <label style="float: right">
+                                        <input type="checkbox">
+                                        <span class="lever"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Content -->
+
+    <!-- Side Nav -->
+    <ul id="nav-mobile" class="side-nav">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="https://placeimg.com/640/640/arch/grayscale">
+                </div>
+                <a href="#!user"><img class="circle" src="https://placeimg.com/64/64/animals"></a>
+                <a href="#!name"><span class="white-text name">Dayat</span></a>
+                <a href="#!email"><span class="white-text email">dayat.py@gmail.com</span></a>
+            </div>
+        </li>
+        <li><a href="#!" class="waves-effect"><i class="material-icons">home</i>Home</a></li>
+        <li><a href="#!" class="waves-effect"><i class="material-icons">assessment</i>Sales</a></li>
+        <li><a href="#!" class="waves-effect"><i class="material-icons">shopping_cart</i>Items</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="subheader">Subheader</a></li>
+        <li><a class="waves-effect" href="settings.html"><i class="material-icons">linear_scale</i>Settings</a></li>
+        <li><a class="waves-effect" href="login.html"><i class="material-icons">account_circle</i>Logout</a></li>
+    </ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".button-collapse").sideNav();
+
+            $('.open-sidenav').click(function() {
+                $('.button-collapse').sideNav('show');
+            });
+
+            $('#textarea1').trigger('autoresize');
+        })
+    </script>
+</body>
+</html>
