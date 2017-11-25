@@ -38,6 +38,11 @@
             height: auto;
         }
         .dataTables_filter, .dataTables_info { display: none; }
+        .btn-small {
+            height: 24px;
+            line-height: 24px;
+            padding: 0 0.5rem;
+        }
     </style>
     <title>Sales</title>
 </head>
@@ -91,14 +96,28 @@
     </div>
     <div class="row">
         <div class="col s12">
-            <div class="card">
+            <div class="center" v-if="!items.length">
+                <div class="preloader-wrapper big active">
+                    <div class="spinner-layer spinner-blue-only">
+                      <div class="circle-clipper left">
+                        <div class="circle"></div>
+                      </div><div class="gap-patch">
+                        <div class="circle"></div>
+                      </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" v-if="items.length">
                 <div class="card-content">
                     <table class="bordered highlight responsive-table" style="font-size: 13px">
                         <thead>
                             <tr class="grey-text text-darken-5">
                                 <th>EbayAccountID</th>
-                                <th></th>
-                                <th>Item</th>
+                                <!--th></th-->
+                                <th width="150">Item</th>
                                 <th>Source</th>
                                 <th>EbayListingID</th>
                                 <th>BuyerName</th>
@@ -106,36 +125,40 @@
                                 <th>SoldPrice</th>
                                 <th>SoldCount</th>
                                 <th>SoldDate/Time</th>
-                                <th>#</th>
+                                <th width="140">Actions</th>
                             </tr>
                         </thead>
                 
                         <tbody>
                             <tr v-for="item in items" class="grey-text text-darken-2">
-                                <td>#{{ item.id }}</td>
-                                <td>
+                                <td>{{ item.Ebay_account }}</td>
+                                <!--td>
                                     <a href="javascript:;" class="grey-text text-darken-2">
                                         <img :src="item.img" width="32" height="32" alt="">
                                     </a>
-                                </td>
+                                </td-->
                                 <td class="valign-wrapper">
-                                    <a href="javascript:;" class="grey-text text-darken-2">{{ item.name }}</a>
+                                    <a href="javascript:;" class="grey-text text-darken-2">{{ item.Item }}</a>
                                 </td>
-                                <td>{{ item.source }}</td>
-                                <td>#{{ item.id }}</td>
-                                <td>{{ item.buyer }}</td>
-                                <td>{{ item.address }}</td>
-                                <td>{{ item.price|currency }}</td>
-                                <td>{{ item.qty }}</td>
-                                <td>{{ item.sold_at }}</td>
+                                <td><a :href="item.Source" target="_blank" class="btn-flat btn-small" title="Go to source"><i class="material-icons">open_in_new</i></a></td>
+                                <td>{{ item.ItemID }}</td>
+                                <td>{{ item.Buyer }}</td>
+                                <td>{{ item.Shipping_Address | replacenone }}</td>
+                                <td>{{ item.Price|currency }}</td>
+                                <td>{{ item.Quantity }}</td>
+                                <td>{{ item.Sold_Out }}</td>
                                 <td>
-                                    <a :data-activates='item.id' class="dropdown-button btn-flat waves-effect btn-more"><i class="material-icons">more_vert</i></a>
+                                    <a href="javascript:;" class="btn-flat btn-small blue-text"><i class="material-icons">shopping_cart</i></a>
+                                    <a href="javascript:;" class="btn-flat btn-small green-text"><i class="material-icons">done</i></a>
+                                    <a href="javascript:;" class="btn-flat btn-small indigo-text"><i class="material-icons">edit</i></a>
+                                    <a href="javascript:;" class="btn-flat btn-small red-text"><i class="material-icons">delete</i></a>
+                                    <!--a :data-activates='item.id' class="dropdown-button btn-flat waves-effect btn-more"><i class="material-icons">more_vert</i></a>
                                     <ul :id='item.id' class='dropdown-content'>
                                         <li title="Detail"><a href="#!">Ordered</a></li>
                                         <li title="Edit"><a href="#!">Shipped</a></li>
                                         <li title="Delete"><a href="#!">Note</a></li>
                                         <li title="Delete"><a href="#!">Delete</a></li>
-                                    </ul>
+                                    </ul-->
                                 </td>
                             </tr>
                         </tbody>
@@ -173,6 +196,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue2-filters/dist/vue2-filters.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         $(document).ready(function() {
             $(".button-collapse").sideNav();
