@@ -17,6 +17,8 @@ var vm = new Vue({
     },
     created: function() {
         var url = "http://localhost:3000/orders"; // change this url to your endpoint
+
+        // use axios to send request to backend
         axios.get(url)
             .then(function(response) {
                 // catch your response here
@@ -36,7 +38,36 @@ var vm = new Vue({
             var val = e.currentTarget.value;
             var dt = $('table').DataTable();
             dt.search(val).draw();
-        }
+        },
+        editPriceModal: function(index) {
+            // console.log(vm.items[index]);
+            this.selectedItemIndex = index;
+            $('#modalEditPrice').modal('open');
+        },
+        saveEditPrice: function() {
+            var item = vm.items[this.selectedItemIndex];
+
+            // update price, dont forget to update in backend to
+            this.$set(item, 'Price', this.newPrice);
+            this.newPrice = 0;
+            $('#modalEditPrice').modal('close');
+        },
+
+        markAsDeleted: function(index) {
+            // this.items.splice(index, 1);
+            var item = this.items[index];
+
+            // change object property, dont forget to update in backend too
+            this.$set(item, 'status', 'deleted');
+        },
+        markAsOrdered: function(index) {
+            var item = this.items[index];
+            this.$set(item, 'status', 'ordered');
+        },
+        markAsShipped: function(index) {
+            var item = this.items[index];
+            this.$set(item, 'status', 'shipped');
+        },
     },
     data: {
         // items: [
@@ -222,5 +253,9 @@ var vm = new Vue({
         //     }
         // ]
         items: [],
+
+        // app state
+        newPrice: 0,
+        selectedItemIndex: null,
     },
 })

@@ -43,6 +43,9 @@
             line-height: 24px;
             padding: 0 0.5rem;
         }
+        td[status=deleted] { border-left: 3px solid #F44336 !important; }
+        td[status=ordered] { border-left: 3px solid #2196F3 !important; }
+        td[status=shipped] { border-left: 3px solid #ffeb3b !important; }
     </style>
     <title>Sales</title>
 </head>
@@ -130,8 +133,8 @@
                         </thead>
                 
                         <tbody>
-                            <tr v-for="item in items" class="grey-text text-darken-2">
-                                <td>{{ item.Ebay_account }}</td>
+                            <tr v-for="(item, index) in items" class="grey-text text-darken-2">
+                                <td :status="item.status">{{ item.Ebay_account }}</td>
                                 <!--td>
                                     <a href="javascript:;" class="grey-text text-darken-2">
                                         <img :src="item.img" width="32" height="32" alt="">
@@ -148,10 +151,10 @@
                                 <td>{{ item.Quantity }}</td>
                                 <td>{{ item.Sold_Out }}</td>
                                 <td>
-                                    <a href="javascript:;" class="btn-flat btn-small blue-text"><i class="material-icons">shopping_cart</i></a>
-                                    <a href="javascript:;" class="btn-flat btn-small green-text"><i class="material-icons">done</i></a>
-                                    <a href="javascript:;" class="btn-flat btn-small indigo-text"><i class="material-icons">edit</i></a>
-                                    <a href="javascript:;" class="btn-flat btn-small red-text"><i class="material-icons">delete</i></a>
+                                    <a href="javascript:;" class="btn-flat btn-small blue-text" title="Mark as ordered" @click="markAsOrdered(index)"><i class="material-icons">shopping_cart</i></a>
+                                    <a href="javascript:;" class="btn-flat btn-small green-text" title="Mark as shipped" @click="markAsShipped(index)"><i class="material-icons">done</i></a>
+                                    <a href="javascript:;" class="btn-flat btn-small indigo-text" @click="editPriceModal(index)" title="Edit price/note"><i class="material-icons">edit</i></a>
+                                    <a href="javascript:;" class="btn-flat btn-small red-text" title="Delete item" @click="markAsDeleted(index)"><i class="material-icons">delete</i></a>
                                     <!--a :data-activates='item.id' class="dropdown-button btn-flat waves-effect btn-more"><i class="material-icons">more_vert</i></a>
                                     <ul :id='item.id' class='dropdown-content'>
                                         <li title="Detail"><a href="#!">Ordered</a></li>
@@ -164,6 +167,17 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+
+        <!-- Modal Edit Price-->
+        <div id="modalEditPrice" class="modal">
+            <div class="modal-content">
+                <p style="margin: 0">Enter new price:</p>
+                <input type="text" v-model="newPrice">
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action waves-effect waves-green btn-flat" @click="saveEditPrice">Save</a>
             </div>
         </div>
     </div>
@@ -204,6 +218,8 @@
             $('.open-sidenav').click(function() {
                 $('.button-collapse').sideNav('show');
             });
+
+            $('#modalEditPrice').modal();
         })
     </script>
 
