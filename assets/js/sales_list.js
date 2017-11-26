@@ -68,6 +68,18 @@ var vm = new Vue({
             var item = this.items[index];
             this.$set(item, 'status', 'shipped');
         },
+        getOrderedClass: function(item) {
+            if (item.status == 'ordered' || item.status == 'shipped') {
+                return 'btn-bs-info';
+            }
+            return 'btn-bs-default';
+        },
+        getShippedClass: function(item) {
+            if (item.status == 'shipped') {
+                return 'btn-bs-warning';
+            }
+            return 'btn-bs-default';
+        }
     },
     data: {
         // items: [

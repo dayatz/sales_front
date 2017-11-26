@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/bootstrap-button.css">
     <style>
         .search:focus {
             /*border-bottom: 1px solid rgb(76, 164, 231) !important;*/
@@ -89,7 +91,7 @@
     <div class="container">
         <div class="row" style="padding: 30px 0 0; margin-bottom: 0">
             <div class="col s6 m3 l3">
-                <h5 class="grey-text text-darken-5">128 Items</h5>
+                <h5 class="grey-text text-darken-5">{{ items.length }} Items</h5>
             </div>
             <div class="input-field col s6 m9 l9" style="margin-top:0">
                 <i class="material-icons prefix grey-text text-darken-5" style="margin-top: 10px">search</i>
@@ -128,7 +130,7 @@
                                 <th>SoldPrice</th>
                                 <th>SoldCount</th>
                                 <th>SoldDate/Time</th>
-                                <th width="140">Actions</th>
+                                <th width="100">Actions</th>
                             </tr>
                         </thead>
                 
@@ -151,10 +153,12 @@
                                 <td>{{ item.Quantity }}</td>
                                 <td>{{ item.Sold_Out }}</td>
                                 <td>
-                                    <a href="javascript:;" class="btn-flat btn-small blue-text" title="Mark as ordered" @click="markAsOrdered(index)"><i class="material-icons">shopping_cart</i></a>
-                                    <a href="javascript:;" class="btn-flat btn-small green-text" title="Mark as shipped" @click="markAsShipped(index)"><i class="material-icons">done</i></a>
-                                    <a href="javascript:;" class="btn-flat btn-small indigo-text" @click="editPriceModal(index)" title="Edit price/note"><i class="material-icons">edit</i></a>
-                                    <a href="javascript:;" class="btn-flat btn-small red-text" title="Delete item" @click="markAsDeleted(index)"><i class="material-icons">delete</i></a>
+                                    <a href="javascript:;" class="btn-bs btn-bs-xs" :class="getOrderedClass(item)" title="Mark as ordered" @click="markAsOrdered(index)"><i class="fa fa-shopping-cart"></i></a>
+                                    <a href="javascript:;" class="btn-bs btn-bs-xs" :class="getShippedClass(item)" title="Mark as shipped" @click="markAsShipped(index)"><i class="fa fa-envelope"></i></a>
+                                    <!--a href="javascript:;" class="btn-bs btn-bs-xs btn-bs-success" title="Mark as shipped" @click="markAsShipped(index)"><i class="fa fa-check"></i></a-->
+
+                                    <a href="javascript:;" class="btn-bs btn-bs-xs btn-bs-primary" @click="editPriceModal(index)" title="Edit price/note"><i class="fa fa-pencil"></i></a>
+                                    <a href="javascript:;" class="btn-bs btn-bs-xs btn-bs-danger" title="Delete item" @click="markAsDeleted(index)"><i class="fa fa-trash"></i></a>
                                     <!--a :data-activates='item.id' class="dropdown-button btn-flat waves-effect btn-more"><i class="material-icons">more_vert</i></a>
                                     <ul :id='item.id' class='dropdown-content'>
                                         <li title="Detail"><a href="#!">Ordered</a></li>
