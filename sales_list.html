@@ -91,7 +91,7 @@
     <div class="container">
         <div class="row" style="padding: 30px 0 0; margin-bottom: 0">
             <div class="col s6 m3 l3">
-                <h5 class="grey-text text-darken-5">[[ items.length ]] Items</h5>
+                <h5 class="grey-text text-darken-5"><% items.length %> Items</h5>
             </div>
             <div class="input-field col s6 m9 l9" style="margin-top:0">
                 <i class="material-icons prefix grey-text text-darken-5" style="margin-top: 10px">search</i>
@@ -136,22 +136,22 @@
                 
                         <tbody>
                             <tr v-for="(item, index) in items" class="grey-text text-darken-2">
-                                <td :status="item.status">[[ item.Ebay_account ]]</td>
+                                <td :status="item.status"><% item.Ebay_account %></td>
                                 <!--td>
                                     <a href="javascript:;" class="grey-text text-darken-2">
                                         <img :src="item.img" width="32" height="32" alt="">
                                     </a>
                                 </td-->
                                 <td class="valign-wrapper">
-                                    <a href="javascript:;" class="grey-text text-darken-2">[[ item.Item ]]</a>
+                                    <a href="javascript:;" class="grey-text text-darken-2"><% item.Item %></a>
                                 </td>
                                 <td><a :href="item.Source" target="_blank" class="btn-flat btn-small" title="Go to source"><i class="material-icons">open_in_new</i></a></td>
-                                <td>[[ item.ItemID ]]</td>
-                                <td>[[ item.Buyer ]]</td>
-                                <td>[[ item.Shipping_Address | replacenone ]]</td>
-                                <td>[[ item.Price|currency ]]</td>
-                                <td>[[ item.Quantity ]]</td>
-                                <td>[[ item.Sold_Out ]]</td>
+                                <td><% item.ItemID %></td>
+                                <td><% item.Buyer %></td>
+                                <td><% item.Shipping_Address | replacenone %></td>
+                                <td><% item.Price|currency %></td>
+                                <td><% item.Quantity %></td>
+                                <td><% item.Sold_Out %></td>
                                 <td>
                                     <a href="javascript:;" class="btn-bs btn-bs-xs" :class="getOrderedClass(item)" title="Mark as ordered" @click="markAsOrdered(index)"><i class="fa fa-shopping-cart"></i></a>
                                     <a href="javascript:;" class="btn-bs btn-bs-xs" :class="getShippedClass(item)" title="Mark as shipped" @click="markAsShipped(index)"><i class="fa fa-envelope"></i></a>
