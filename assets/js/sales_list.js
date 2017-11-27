@@ -4,6 +4,7 @@ Vue.filter('replacenone', function (value) {
 
 var vm = new Vue({
     el: '#app',
+    delimiters: ["${{","}}"],
     mounted: function() {
         $('table').dataTable({
             "columnDefs": [{

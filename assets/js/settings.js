@@ -1,5 +1,6 @@
 var vm = new Vue({
     el: '#settings',
+    delimiters: ["${{","}}"],
     data: {
         rows: [
             {
