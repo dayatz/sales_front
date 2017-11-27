@@ -126,6 +126,7 @@
                                 <th>Source</th>
                                 <th>EbayListingID</th>
                                 <th>BuyerName</th>
+                                <th>BuyerEmail</th>
                                 <th>ShippingAddress</th>
                                 <th>SoldPrice</th>
                                 <th>SoldCount</th>
@@ -148,6 +149,7 @@
                                 <td><a :href="item.Source" target="_blank" class="btn-flat btn-small" title="Go to source"><i class="material-icons">open_in_new</i></a></td>
                                 <td><% item.ItemID %></td>
                                 <td><% item.Buyer %></td>
+                                <td><% item.Buyer_Email %></td>
                                 <td><% item.Shipping_Address | replacenone %></td>
                                 <td><% item.Price|currency %></td>
                                 <td><% item.Quantity %></td>
