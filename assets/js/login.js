@@ -1,5 +1,6 @@
 var vm = new Vue({
     el: '#login-form',
+    delimiters: ["[[","]]"],
     methods: {
         loginClick: function() {
             Materialize.toast('Login success! Redirecting...');
